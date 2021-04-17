@@ -1,0 +1,176 @@
+{
+	"info": {
+		"description": "Web Application using Flask and Swagger UI"
+		,"title": "CS 4783 Project"
+		,"version": "1.0.0" 
+	}
+	, "host": "localhost:8080"
+	, "produces": [
+		"application/json" 
+	]
+	, "schemes": [
+		"https"
+	]
+	, "securityDefinitions": {
+		"api_key": {
+			"type": "apiKey",
+			"in": "header",
+			"name": "api_key"
+		}
+	}
+	,"swagger": "2.0"
+	,"paths": { 
+		"/hello": { 
+			"get": {
+				"parameters": [] 
+				,"description": "The proverbial hello world minus the world." 
+				,"tags": [
+					"hello"
+				]
+				,"responses": {
+					"200": {
+						"description":"Hello response to caller." 
+					}
+				}
+			}
+		}
+		,"/properties": { 
+			"get": {
+				"parameters": [] 
+				,"description": "Lists all properties on record ordered by property_id."
+				,"tags": [
+					"properties"
+				]
+				,"responses": {
+					"200": {
+						"description":"All properties response to caller." 
+					}
+				}
+			}
+			,"post": {
+				"parameters": [
+				]
+				,"description": "Adds a new property at the end of the properties table."
+				,"tags": [
+					"properties"
+				]
+				, "security": [
+					{
+						"api_key":[]
+					}
+				]
+				,"responses": {
+					"200": {
+						"description":"All properties response to caller." 
+					}
+				}
+			}
+		}
+		,"/properties/{property_id}": { 
+			"get": {
+				"parameters": [ 
+					{	"name":"property_id",
+						"in":"path",
+						"description":"ID of property to find",
+						"required":true,
+						"type":"integer",
+						"format":"int64"
+					}
+				]
+				,"description": "Returns the property <property_id>."
+				,"tags": [
+					"properties"
+				]
+				,"responses": {
+					"200": {
+						"description":"Single property response to caller." 
+					}
+				}
+			}
+			,"delete": {
+				"parameters": [					
+					{	"name":"property_id",
+						"in":"path",
+						"description":"ID of property to remove",
+						"required":true,
+						"type":"integer",
+						"format":"int64"
+					}
+				]
+				,"description": "Deletes <property_id>."
+				,"tags": [
+					"properties"
+				]
+				, "security": [
+					{
+						"api_key":[]
+					}
+				]
+				,"responses": {
+					"200": {
+						"description":"Single property response to caller." 
+					}
+				}
+			}
+			,"put": {
+				"parameters": [
+					{	"name":"property_id",
+						"in":"path",
+						"description":"ID of property to change",
+						"required":true,
+						"type":"integer",
+						"format":"int64"
+					}
+				]
+				,"description": "Altars data from <property_id>."
+				,"tags": [
+					"properties"
+				]
+				, "security": [
+					{
+						"api_key":[]
+					}
+				]
+				,"responses": {
+					"200": {
+						"description":"Single property response to caller." 
+					}
+				}
+			}
+		}
+	}
+	,"definitions":{
+		"Property": {
+			"type": "object",
+			"properties": {
+				"property_id": {
+					"type": "integer"
+				},
+				"address": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+				"zip": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"property_id","address","city","state","zip"
+			]
+		}
+	}
+	, "responses":{ 
+	}
+	, "parameters":{ 
+	}
+	, "tags": [
+		{ "name": "hello"
+			,"description": "Says hello to the caller" 
+		}
+	]
+}
